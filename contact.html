@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تماس و رزرو اختصاصی | D8 Gallery Contact & Viewing</title>
+  <meta name="description" content="ارتباط مستقیم با گالری D8، ثبت سفارش از طریق تلگرام و رزرو وقت بازدید حضوری در سالن نمایش خصوصی تهران." />
+  <meta name="theme-color" content="#fcf9f2" />
+
+  <!-- Base Stylesheet -->
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+
+  <!-- Top Ambient & Edition Bar -->
+  <aside style="background-color: var(--color-surface); border-bottom: 1px solid var(--border-hairline); font-size: 0.75rem; padding: 0.45rem 0;">
+    <div class="site-container" style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-variant);">
+        <span class="pulse-dot" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: var(--color-gold);"></span>
+        <span style="font-family: var(--font-mono);">PRIVATE VIEWINGS & ORDERS · رزرو و سفارش اختصاصی</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button id="sound-toggle-btn" onclick="toggleAtelierSound()" style="background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; color: var(--color-text-muted);">
+          <span class="material-symbols-outlined text-[16px]">graphic_eq</span>
+          <span>صدای آتلیه: بی‌صدا</span>
+        </button>
+        <span style="opacity: 0.4;">|</span>
+        <a href="https://t.me/D8Gallery" target="_blank" style="color: var(--color-gold-deep); font-weight: 500; display: flex; align-items: center; gap: 0.25rem;">
+          <span>پشتیبانی تلگرام</span>
+          <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sticky Glass Navigation -->
+  <header class="glass-header" style="position: sticky; top: 0; z-index: 50;">
+    <div class="site-container" style="display: flex; align-items: center; justify-content: space-between; height: 74px;">
+      
+      <a href="index.html" style="display: flex; align-items: center; gap: 0.85rem;">
+        <img src="assets/logo.svg" alt="D8 Logo" style="width: 38px; height: 38px;" />
+        <div>
+          <span style="font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700; letter-spacing: 0.08em; display: block; line-height: 1.1;">D8 GALLERY</span>
+          <span style="font-size: 0.7rem; color: var(--color-gold-deep); letter-spacing: 0.15em; display: block;">HAUTE SCULPTURE</span>
+        </div>
+      </a>
+
+      <nav style="display: none; align-items: center; gap: 2rem;" class="nav-desktop">
+        <a href="index.html" style="color: var(--color-text-variant); transition: color 0.2s;">صفحه اصلی</a>
+        <a href="products.html" style="color: var(--color-text-variant); transition: color 0.2s;">آثار و کاتالوگ</a>
+        <a href="about.html" style="color: var(--color-text-variant); transition: color 0.2s;">مانیفست و داستان</a>
+        <a href="contact.html" style="font-weight: 600; color: var(--color-text); position: relative;">
+          تماس و رزرو اختصاصی
+          <span style="position: absolute; bottom: -6px; right: 0; left: 0; height: 2px; background: var(--color-gold); border-radius: 2px;"></span>
+        </a>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a href="https://t.me/D8Gallery" target="_blank" class="btn btn-telegram" style="padding: 0.55rem 1.25rem; font-size: 0.82rem;">
+          <span class="material-symbols-outlined text-[18px]">send</span>
+          <span>سفارش در تلگرام</span>
+        </a>
+
+        <a href="manage.html" class="btn btn-secondary" style="padding: 0.55rem 1rem; font-size: 0.8rem;">
+          <span class="material-symbols-outlined text-[16px]">tune</span>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem;">MANAGE</span>
+        </a>
+
+        <button onclick="toggleMobileMenu()" class="btn-outline mobile-menu-btn" style="display: none; padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-hairline);">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Overlay & Drawer -->
+  <div id="nav-overlay" class="inspector-overlay"></div>
+  <div id="mobile-nav" class="mobile-nav-drawer">
+    <div>
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="assets/logo.svg" alt="D8 Logo" style="width: 32px; height: 32px;" />
+          <span style="font-family: var(--font-serif); font-weight: 700;">D8 GALLERY</span>
+        </div>
+        <button onclick="toggleMobileMenu()" style="background: none; border: none; cursor: pointer; color: var(--color-text-muted);">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <nav style="display: flex; flex-direction: column; gap: 1.5rem; font-size: 1.15rem;">
+        <a href="index.html" onclick="toggleMobileMenu()">صفحه اصلی</a>
+        <a href="products.html" onclick="toggleMobileMenu()">آثار و کاتالوگ جواهرات</a>
+        <a href="about.html" onclick="toggleMobileMenu()">مانیفست و داستان گالری</a>
+        <a href="contact.html" onclick="toggleMobileMenu()" style="font-weight: 600; color: var(--color-gold-deep);">تماس و رزرو خصوصی</a>
+        <a href="manage.html" onclick="toggleMobileMenu()" style="color: var(--color-text-muted); font-size: 0.95rem;">کنسول مدیریت (MANAGE)</a>
+      </nav>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+      <a href="https://t.me/D8Gallery" target="_blank" class="btn btn-telegram" style="width: 100%;">
+        <span class="material-symbols-outlined">send</span>
+        <span>ثبت سفارش مستقیم در تلگرام</span>
+      </a>
+    </div>
+  </div>
+
+  <main style="padding: 4.5rem 0 6rem 0;">
+    <div class="site-container">
+      
+      <!-- Section Header -->
+      <div style="max-width: 750px; margin-bottom: 3.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <span class="keyline-gold"></span>
+          <span style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--color-gold-deep); letter-spacing: 0.1em;">
+            ATELIER CONCIERGE · خدمات و ارتباط اختصاصی
+          </span>
+        </div>
+        <h1 style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 700; margin-bottom: 1rem;">
+          رزرو بازدید و مشاوره اختصاصی
+        </h1>
+        <p style="font-size: 1.05rem; line-height: 1.9; color: var(--color-text-variant);">
+          برای تجربه لمس آثار در سالن نمایش اختصاصی یا گفتگوی مستقیم در مورد سفارش ساخت سفارشی، از راه‌های ارتباطی زیر استفاده فرمایید یا فرم رزرو را تکمیل فرمایید.
+        </p>
+      </div>
+
+      <!-- Quick Contact Channels (Telegram Priority) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+        
+        <!-- Telegram Channel Card -->
+        <div class="glass-card" style="padding: 2rem; border-radius: var(--radius-lg); border: 2px solid rgba(34, 158, 217, 0.3); background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240, 248, 255, 0.8) 100%);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #229ED9; color: #fff; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined text-[24px]">send</span>
+            </div>
+            <span class="badge-gold" style="background: rgba(34, 158, 217, 0.15); color: #166b96; border-color: rgba(34, 158, 217, 0.3);">
+              پاسخگویی سریع
+            </span>
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">سفارش مستقیم در تلگرام</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem;">
+            سریع‌ترین شیوه استعلام قیمت روز، ثبت سفارش، بررسی سایز و دریافت ویدیو از تمام زوایای اثر.
+          </p>
+          <a href="https://t.me/D8Gallery" target="_blank" class="btn btn-telegram" style="width: 100%;">
+            <span class="material-symbols-outlined text-[18px]">send</span>
+            <span>ارسال پیام به t.me/D8Gallery</span>
+          </a>
+        </div>
+
+        <!-- WhatsApp Card -->
+        <div class="glass-card" style="padding: 2rem; border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: #25D366; color: #fff; display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined text-[24px]">chat</span>
+            </div>
+            <span class="badge-dark">مشاوره واتس‌اپ</span>
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">پشتیبانی بین‌المللی</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem;">
+            ارتباط با کانسیرژ اختصاصی برای مشتریان خارج از کشور و ارسال بین‌المللی با بیمه کامل لوکس.
+          </p>
+          <a href="https://wa.me/989120000000" target="_blank" class="btn btn-secondary" style="width: 100%;">
+            <span class="material-symbols-outlined text-[18px]">chat</span>
+            <span>گفتگو در واتس‌اپ</span>
+          </a>
+        </div>
+
+        <!-- Viewing Studio Card -->
+        <div class="glass-card" style="padding: 2rem; border-radius: var(--radius-lg);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(197, 160, 89, 0.2); color: var(--color-gold-deep); display: flex; align-items: center; justify-content: center;">
+              <span class="material-symbols-outlined text-[24px]">pin_drop</span>
+            </div>
+            <span class="badge-gold">فقط با هماهنگی</span>
+          </div>
+          <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem;">سالن نمایش خصوصی</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.5rem;">
+            تهران: فرشته، مجتمع سام / پاریس: Place Vendôme.<br />
+            پذیرش هر روز از ساعت ۱۱:۰۰ الی ۲۰:۰۰
+          </p>
+          <button onclick="document.getElementById('booking-form').scrollIntoView({behavior: 'smooth'})" class="btn btn-outline" style="width: 100%;">
+            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+            <span>رزرو وقت ملاقات</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Private Viewing Booking Form -->
+      <div id="booking-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; margin-bottom: 6rem;" class="contact-grid">
+        
+        <!-- Form Column -->
+        <div class="glass-card" style="padding: 2.5rem; border-radius: var(--radius-lg);">
+          <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--color-gold-deep); margin-bottom: 0.5rem;">
+            PRIVATE VIEWING REQUEST · درخواست جلسه خصوصی
+          </div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1.5rem;">
+            تکمیل مشخصات جهت رزرو
+          </h2>
+
+          <form onsubmit="handleBookingSubmit(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            
+            <div>
+              <label for="client-name" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">نام و نام خانوادگی:</label>
+              <input 
+                type="text" 
+                id="client-name" 
+                required 
+                placeholder="مثلاً: سارا رادمنش" 
+                style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium); background: #fff; font-size: 0.9rem; outline: none;"
+              />
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div>
+                <label for="client-phone" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">شماره تماس / تلگرام:</label>
+                <input 
+                  type="tel" 
+                  id="client-phone" 
+                  required 
+                  placeholder="۰۹۱۲۳۴۵۶۷۸۹" 
+                  style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium); background: #fff; font-size: 0.9rem; outline: none; direction: ltr; text-align: right;"
+                />
+              </div>
+
+              <div>
+                <label for="client-date" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">تاریخ پیشنهادی:</label>
+                <input 
+                  type="date" 
+                  id="client-date" 
+                  required 
+                  style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium); background: #fff; font-size: 0.9rem; outline: none;"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="client-interest" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">موضوع جلسه یا اثر مورد نظر:</label>
+              <select 
+                id="client-interest" 
+                style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium); background: #fff; font-size: 0.9rem; outline: none; cursor: pointer;"
+              >
+                <option value="viewing">بازدید کلی از کلکسیون نسخه ۰۱</option>
+                <option value="torus">سفارش و بررسی حلقه مجسمه‌ای توروس</option>
+                <option value="arc">پرو و بررسی طوق گردنبند آرک</option>
+                <option value="custom">طراحی و ساخت یکتای اختصاصی (Bespoke)</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="client-notes" style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">توضیحات تکمیلی یا درخواست ویژه:</label>
+              <textarea 
+                id="client-notes" 
+                rows="3" 
+                placeholder="سایز انگشت، نوع متریال دلخواه یا زمان مورد نظر..." 
+                style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-medium); background: #fff; font-size: 0.9rem; outline: none; resize: vertical;"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="padding: 0.9rem; font-size: 0.95rem; margin-top: 0.5rem;">
+              <span>ارسال درخواست رزرو وقت</span>
+              <span class="material-symbols-outlined text-[18px]">check</span>
+            </button>
+
+            <div style="font-size: 0.75rem; color: var(--color-text-muted); text-align: center;">
+              پس از ثبت فرم، کانسیرژ گالری ظرف حداکثر ۲ ساعت جهت تایید نهایی در تلگرام با شما هماهنگ خواهد شد.
+            </div>
+
+          </form>
+        </div>
+
+        <!-- FAQ Column -->
+        <div>
+          <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--color-gold-deep); margin-bottom: 0.5rem;">
+            FREQUENT QUESTIONS · پرسش‌های متداول
+          </div>
+          <h2 style="font-family: var(--font-serif); font-size: 1.75rem; margin-bottom: 1.5rem;">
+            آنچه پیش از سفارش باید بدانید
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <details class="glass-card" style="padding: 1.25rem 1.5rem; border-radius: var(--radius-md); cursor: pointer;" open>
+              <summary style="font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; align-items: center; justify-content: space-between;">
+                <span>سفارش از طریق تلگرام چگونه انجام می‌شود؟</span>
+                <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold);">expand_more</span>
+              </summary>
+              <p style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--color-text-variant); line-height: 1.8;">
+                با کلیک بر روی دکمه «سفارش تلگرام» در هر اثر، پیام مشخصات کامل آن قطعه به صفحه تلگرام رسمی D8 ارسال می‌شود. کارشناس گالری سایز و آدرس شما را دریافت کرده و فاکتور رسمی هولوگرام‌دار صادر می‌گردد.
+              </p>
+            </details>
+
+            <details class="glass-card" style="padding: 1.25rem 1.5rem; border-radius: var(--radius-md); cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; align-items: center; justify-content: space-between;">
+                <span>آیا طلاها و نقره‌ها دارای عیارسنجی رسمی هستند؟</span>
+                <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold);">expand_more</span>
+              </summary>
+              <p style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--color-text-variant); line-height: 1.8;">
+                بله، تمامی دست‌سازه‌های طلای ۱۸ عیار (کد استاندارد ۷۵۰) و نقره ۹۲۵ توسط اتحادیه طلا و جواهر و آزمایشگاه رسمی ری‌گیری سنجیده شده و کد رهگیری در فاکتور قید می‌شود.
+              </p>
+            </details>
+
+            <details class="glass-card" style="padding: 1.25rem 1.5rem; border-radius: var(--radius-md); cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; align-items: center; justify-content: space-between;">
+                <span>زمان تحویل قطعات سفارشی چقدر است؟</span>
+                <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold);">expand_more</span>
+              </summary>
+              <p style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--color-text-variant); line-height: 1.8;">
+                قطعات موجود در گالری تهران همان روز ارسال می‌شوند. قطعات سفارشی‌ساز به دلیل فرآیند دقیق مدل‌سازی مومی و ریخته‌گری دست‌ساز، بین ۵ الی ۸ روز کاری آماده تحویل خواهند بود.
+              </p>
+            </details>
+
+            <details class="glass-card" style="padding: 1.25rem 1.5rem; border-radius: var(--radius-md); cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 0.95rem; list-style: none; display: flex; align-items: center; justify-content: space-between;">
+                <span>شرایط بازگشت یا تغییر سایز چیست؟</span>
+                <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold);">expand_more</span>
+              </summary>
+              <p style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--color-text-variant); line-height: 1.8;">
+                تغییر سایز حلقه‌ها و کاف‌ها تا یک نوبت به صورت کاملاً رایگان در آتلیه انجام می‌پذیرد. همچنین در صورت عدم رضایت تا ۴۸ ساعت امکان عودت اثر فراهم است.
+              </p>
+            </details>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification Node -->
+  <div id="d8-toast"></div>
+
+  <!-- Footer -->
+  <footer style="background-color: var(--color-canvas); border-top: 1px solid var(--border-hairline); padding: 4rem 0 2rem 0;">
+    <div class="site-container">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="assets/logo.svg" alt="D8 Logo" style="width: 28px; height: 28px;" />
+          <span style="font-family: var(--font-serif); font-weight: 700;">D8 GALLERY · تماس و رزرو</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--color-text-muted);">
+          پاسخگویی مستقیم در تلگرام: <a href="https://t.me/D8Gallery" target="_blank" style="color: #229ED9; font-weight: 600;">@D8Gallery</a>
+        </div>
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-subtle);">
+          CLOUDFLARE PAGES READY
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+
+  <script>
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("client-name").value;
+      const phone = document.getElementById("client-phone").value;
+      const date = document.getElementById("client-date").value;
+      const interest = document.getElementById("client-interest").options[document.getElementById("client-interest").selectedIndex].text;
+      const notes = document.getElementById("client-notes").value;
+
+      showD8Toast(`درخواست شما با موفقیت ثبت شد، ${name} گرامی. هماهنگی از طریق تلگرام انجام خواهد شد.`, "event_available");
+
+      // Optional direct telegram forward
+      const telegramMessage = `درخواست رزرو وقت ملاقات خصوصی گالری D8:
+👤 نام: ${name}
+📞 تلفن: ${phone}
+📅 تاریخ پیشنهادی: ${date}
+💍 موضوع جلسه: ${interest}
+📝 توضیحات: ${notes || 'ندارد'}`;
+
+      setTimeout(() => {
+        const proceedTelegram = confirm("آیا مایلید جزئیات این رزرو هم‌اکنون مستقیماً در تلگرام گالری نیز ارسال شود؟");
+        if (proceedTelegram) {
+          window.open(`https://t.me/${D8_CONFIG.telegramUsername}?text=${encodeURIComponent(telegramMessage)}`, '_blank');
+        }
+      }, 1000);
+
+      e.target.reset();
+    }
+  </script>
+
+  <style>
+    @media (min-width: 900px) {
+      .nav-desktop { display: flex !important; }
+      .mobile-menu-btn { display: none !important; }
+      .contact-grid { grid-template-columns: 1.15fr 0.85fr !important; }
+    }
+    @media (max-width: 899px) {
+      .mobile-menu-btn { display: inline-flex !important; }
+      .contact-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+</body>
+</html>

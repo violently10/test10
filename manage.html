@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>کنسول مدیریت آتلیه | D8 Atelier Director Console</title>
+  <meta name="description" content="کنسول اختصاصی مدیریت گالری D8، کنترل کاتالوگ، تنظیمات نمایشگاه و سفارشات تلگرام." />
+  <meta name="theme-color" content="#141312" />
+
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body style="background-color: #141312; color: #e6e1df;">
+
+  <!-- Director Console Header -->
+  <header style="background: rgba(20, 19, 18, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid #363433; position: sticky; top: 0; z-index: 50;">
+    <div class="site-container" style="display: flex; align-items: center; justify-content: space-between; height: 70px;">
+      
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="index.html" style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="assets/logo.svg" alt="D8 Logo" style="width: 32px; height: 32px; filter: invert(1);" />
+          <div>
+            <span style="font-family: var(--font-serif); font-weight: 700; color: #fff; font-size: 1.1rem; letter-spacing: 0.05em; display: block;">D8 GALLERY</span>
+            <span style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-gold-bright);">ATELIER DIRECTOR CONSOLE</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Telemetry status pills (from Stitch Image 1) -->
+      <div style="display: none; align-items: center; gap: 0.75rem; font-family: var(--font-mono); font-size: 0.72rem;" class="console-telemetry">
+        <div style="background: rgba(255,255,255,0.05); padding: 0.35rem 0.75rem; border-radius: var(--radius-pill); border: 1px solid #363433; display: flex; align-items: center; gap: 0.4rem;">
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: #4ade80;"></span>
+          <span style="color: #9a8f80;">DATA NODE:</span>
+          <span style="color: #fff;">SYNCED</span>
+        </div>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 0.35rem 0.75rem; border-radius: var(--radius-pill); border: 1px solid #363433; display: flex; align-items: center; gap: 0.4rem;">
+          <span style="color: #9a8f80;">TELEGRAM DISPATCH:</span>
+          <span style="color: #229ED9;">@D8Gallery</span>
+        </div>
+      </div>
+
+      <!-- Return to Live Storefront Button -->
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <a href="index.html" class="btn btn-secondary" style="background: rgba(255,255,255,0.08); border-color: #363433; color: #fff; padding: 0.5rem 1.25rem; font-size: 0.8rem;">
+          <span class="material-symbols-outlined text-[16px]">visibility</span>
+          <span>مشاهده فروشگاه زنده</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <main style="padding: 2.5rem 0 5rem 0;">
+    <div class="site-container">
+
+      <!-- Navigation Tabs (Stitch Director Tabs) -->
+      <div style="display: flex; gap: 0.5rem; border-bottom: 1px solid #363433; padding-bottom: 1rem; margin-bottom: 2.5rem; overflow-x: auto;">
+        <button class="tab-btn active" onclick="switchConsoleTab('overview', this)">
+          <span class="material-symbols-outlined text-[18px]">dashboard</span>
+          <span>نمای کلی و سفارشات</span>
+        </button>
+        <button class="tab-btn" onclick="switchConsoleTab('catalog', this)">
+          <span class="material-symbols-outlined text-[18px]">diamond</span>
+          <span>مدیریت کاتالوگ آثار</span>
+        </button>
+        <button class="tab-btn" onclick="switchConsoleTab('media', this)">
+          <span class="material-symbols-outlined text-[18px]">perm_media</span>
+          <span>کتابخانه مدیا و عکس‌ها</span>
+        </button>
+        <button class="tab-btn" onclick="switchConsoleTab('security', this)">
+          <span class="material-symbols-outlined text-[18px]">security</span>
+          <span>پیکربندی تلگرام و آتلیه</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: OVERVIEW & TELEGRAM METRICS -->
+      <section id="tab-overview" class="console-tab-content">
+        
+        <!-- Metrics Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+          
+          <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+              <span style="font-size: 0.78rem; color: #9a8f80;">سفارش‌های در جریان تلگرام</span>
+              <span class="material-symbols-outlined text-[20px]" style="color: #229ED9;">send</span>
+            </div>
+            <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: #fff;">۱۸ سفارش</div>
+            <div style="font-size: 0.75rem; color: #4ade80; margin-top: 0.4rem;">+۲۴٪ نسبت به نسخه پیشین</div>
+          </div>
+
+          <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+              <span style="font-size: 0.78rem; color: #9a8f80;">ارزش آثار در صف تحویل</span>
+              <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold-bright);">payments</span>
+            </div>
+            <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: #fff;">$14,280</div>
+            <div style="font-size: 0.75rem; color: var(--color-gold-bright); margin-top: 0.4rem;">معادل ۱,۴۲۸,۰۰۰,۰۰۰ تومان</div>
+          </div>
+
+          <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+              <span style="font-size: 0.78rem; color: #9a8f80;">رزرو جلسات بازدید حضوری</span>
+              <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold-bright);">event_seat</span>
+            </div>
+            <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: #fff;">۶ جلسه</div>
+            <div style="font-size: 0.75rem; color: #9a8f80; margin-top: 0.4rem;">سالن نمایش فرشته، تهران</div>
+          </div>
+
+          <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+              <span style="font-size: 0.78rem; color: #9a8f80;">موجودی طلای شمش ۱۸ عیار</span>
+              <span class="material-symbols-outlined text-[20px]" style="color: var(--color-gold-bright);">shield</span>
+            </div>
+            <div style="font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: #fff;">۱,۲۴۰ گرم</div>
+            <div style="font-size: 0.75rem; color: #4ade80; margin-top: 0.4rem;">تاییدیه آزمایشگاه اتحادیه</div>
+          </div>
+
+        </div>
+
+        <!-- Recent Telegram Inquiries List -->
+        <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 style="font-family: var(--font-serif); font-size: 1.25rem;">آخرین استعلام‌های تلگرام</h3>
+            <a href="https://t.me/D8Gallery" target="_blank" class="btn btn-telegram" style="padding: 0.45rem 1rem; font-size: 0.78rem;">
+              <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+              <span>ورود به تلگرام گالری</span>
+            </a>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; text-align: right; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="border-bottom: 1px solid #363433; color: #9a8f80;">
+                  <th style="padding: 0.75rem 0.5rem;">شناسه اثر</th>
+                  <th style="padding: 0.75rem 0.5rem;">نام اثر</th>
+                  <th style="padding: 0.75rem 0.5rem;">مشتری</th>
+                  <th style="padding: 0.75rem 0.5rem;">ارزش</th>
+                  <th style="padding: 0.75rem 0.5rem;">کانال</th>
+                  <th style="padding: 0.75rem 0.5rem;">اقدام</th>
+                </tr>
+              </thead>
+              <tbody style="divide-y: 1px solid #2a2827;">
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 1rem 0.5rem; font-family: var(--font-mono); color: var(--color-gold-bright);">SKU-7821-AU</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">The Torus Band (حلقه توروس)</td>
+                  <td style="padding: 1rem 0.5rem;">خانم مریم ص. (@maryam_s)</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">$420</td>
+                  <td style="padding: 1rem 0.5rem;"><span style="color: #229ED9;">تلگرام مستقیم</span></td>
+                  <td style="padding: 1rem 0.5rem;">
+                    <button onclick="showD8Toast('ارتباط با مشتری در تلگرام تایید شد', 'done_all')" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; background: #2a2827; border-color: #444; color: #fff;">پاسخ داده شد</button>
+                  </td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                  <td style="padding: 1rem 0.5rem; font-family: var(--font-mono); color: var(--color-gold-bright);">SKU-4910-AG</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">The Arc Collar (طوق آرک)</td>
+                  <td style="padding: 1rem 0.5rem;">آقای سپهر ک. (@sepehr_k)</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">$540</td>
+                  <td style="padding: 1rem 0.5rem;"><span style="color: #229ED9;">تلگرام مستقیم</span></td>
+                  <td style="padding: 1rem 0.5rem;">
+                    <button onclick="showD8Toast('فاکتور هولوگرام‌دار صادر شد', 'receipt_long')" class="btn btn-gold" style="padding: 0.35rem 0.75rem; font-size: 0.75rem;">صدور فاکتور</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 1rem 0.5rem; font-family: var(--font-mono); color: var(--color-gold-bright);">SKU-8920-AU</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">The Fold Cuff (دستبند کاف فولد)</td>
+                  <td style="padding: 1rem 0.5rem;">رزرو خصوصی (@paris_atelier)</td>
+                  <td style="padding: 1rem 0.5rem; font-weight: 600;">$840</td>
+                  <td style="padding: 1rem 0.5rem;"><span style="color: #25D366;">جلسه حضوری</span></td>
+                  <td style="padding: 1rem 0.5rem;">
+                    <button onclick="showD8Toast('وقت ملاقات در تقویم ثبت شد', 'event')" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; background: #2a2827; border-color: #444; color: #fff;">هماهنگی تقویم</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 2: CATALOG MANAGER -->
+      <section id="tab-catalog" class="console-tab-content" style="display: none;">
+        <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.35rem;">کاتالوگ اشیاء و قیمت‌گذاری</h3>
+              <p style="font-size: 0.8rem; color: #9a8f80;">تنظیم قیمت، موجودی انبار و وضعیت سفارش تلگرام</p>
+            </div>
+            <button onclick="showD8Toast('قطعه جدید به آرشیو افزوده شد', 'add')" class="btn btn-gold" style="padding: 0.5rem 1.25rem; font-size: 0.82rem;">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+              <span>افزودن اثر جدید</span>
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;" id="console-catalog-list">
+            <!-- Dynamic items rendered by script below -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: MEDIA LIBRARY (Stitch Screen 7) -->
+      <section id="tab-media" class="console-tab-content" style="display: none;">
+        <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div>
+              <h3 style="font-family: var(--font-serif); font-size: 1.35rem;">کتابخانه مدیا و دارایی‌های بصری (D65 Master Vault)</h3>
+              <p style="font-size: 0.8rem; color: #9a8f80;">تصاویر با رزولوشن مستر و متادیتای رنگی</p>
+            </div>
+            <button onclick="showD8Toast('آپلودر باز شد (آماده انتخاب فایل)', 'upload')" class="btn btn-secondary" style="background: #2a2827; border-color: #444; color: #fff; padding: 0.5rem 1.25rem; font-size: 0.82rem;">
+              <span class="material-symbols-outlined text-[16px]">upload</span>
+              <span>بارگذاری تصویر جدید</span>
+            </button>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+            <div style="position: relative; border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 1/1; border: 1px solid #363433;">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs99v8b-AQKmFJ3HTmEF2vgHWVWESl7xomwlf41YbBNb46JF1ILjIHW_6LsrU6zjae3lqHks5o8hR-eKy-t2OdFFYrzLZkMC3d3bt8aR8-yi1dqLitPP5XNy6ukJCQa3zftY0T8800uGaj9fBdamq4dLTFu_RpKuYDxq_Gkb9dLS8kQ-kkGr618QAZTw8WWzXkgqHrWXjyY1H7DhvKhgs-uReddyuxiiK7H6EvUTXUQLkXMSwgMO7cQw" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; bottom: 0; inset-x: 0; background: rgba(0,0,0,0.8); padding: 0.35rem 0.5rem; font-size: 0.68rem; font-family: var(--font-mono);">torus_hero_d65.jpg</div>
+            </div>
+
+            <div style="position: relative; border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 1/1; border: 1px solid #363433;">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3xNPLUzbemOWcdEoI43RU0E4aUrhMsfVdEGCFqxyqpUeDqp-JByWsSBUNW64Eip2Btmx1WUendsgmOz5JTQLOU-sff5Ifc77_U2dCoqcPK7HqnVDWdxo9ys2KGGgK3sZfDJ5yoYDPVHQMcJbEQi1j1jE-A3loTIRLz3BPCZEL62mX1FzxhVfciEeac6DiUb08ktSXMf_jzHrsELecOhBatSDpygizJTGi5AwFJ6AKo_55Jt20Ct1qIg" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; bottom: 0; inset-x: 0; background: rgba(0,0,0,0.8); padding: 0.35rem 0.5rem; font-size: 0.68rem; font-family: var(--font-mono);">arc_collar_silver.jpg</div>
+            </div>
+
+            <div style="position: relative; border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 1/1; border: 1px solid #363433;">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADwNeDMwtv4-IxDmvv2gm7EQErSrLV5UcZils5TGvYl2EbCFAtIM8VvBFQJ5BVyGTivLMxSwn3yO1faTKUg0-UmUuymZI9SGzg4LsSTkVjUsXr0Kdx8W7VhbnsJPtOPv2dH8yFJ6wWrCftr75XZyJJvIZOcwVqUQ9S67v6OmwddU60aBVNh8KMzZe22Tz-WEDbMVChkEk9fspMourDqZ_mh1CIib3qIN-U8qeHwpqfhRkODGgjEuKpug" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; bottom: 0; inset-x: 0; background: rgba(0,0,0,0.8); padding: 0.35rem 0.5rem; font-size: 0.68rem; font-family: var(--font-mono);">fold_cuff_hammered.jpg</div>
+            </div>
+
+            <div style="position: relative; border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 1/1; border: 1px solid #363433;">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCowQwy0P1ltXbgVO6DAMmjV5G_L2NS6-bMvR1M-MXNrk3SVPhXgUwBJZvUytFDTHJxSiIjIe2OxzN2sOcGNW7ik3p1nHy-2mr1fvMDkLaTXI4Osay8fBA0qMng18T4tA7Epg3tA3rbVRGLIyoxDJ8XlbtOAbqfOcu5WY_Ub1nbOg_apmnAoMHwX9XSO6ucXFHDO7dtApaH6xCR-jibRDneG06TiKrTeft1oz84_O1KNov3S4wHR-aEMw" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="position: absolute; bottom: 0; inset-x: 0; background: rgba(0,0,0,0.8); padding: 0.35rem 0.5rem; font-size: 0.68rem; font-family: var(--font-mono);">droplet_platinum.jpg</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: TELEGRAM & ATELIER CONFIG -->
+      <section id="tab-security" class="console-tab-content" style="display: none;">
+        <div style="background: #1c1b1a; border: 1px solid #363433; border-radius: var(--radius-md); padding: 2rem; max-width: 600px;">
+          <h3 style="font-family: var(--font-serif); font-size: 1.35rem; margin-bottom: 0.5rem;">پیکربندی ارتباطات تلگرام و سالن نمایش</h3>
+          <p style="font-size: 0.8rem; color: #9a8f80; margin-bottom: 2rem;">تنظیم آیدی تلگرام برای دکمه‌های سفارش مستقیم وب‌سایت</p>
+
+          <form onsubmit="handleConfigSave(event)" style="display: flex; flex-direction: column; gap: 1.25rem;">
+            <div>
+              <label style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #ccc;">آیدی تلگرام دریافت سفارشات (@username):</label>
+              <input type="text" id="cfg-telegram" value="D8Gallery" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid #363433; background: #141312; color: #fff; font-family: var(--font-mono); direction: ltr;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #ccc;">شماره واتس‌اپ پشتیبانی:</label>
+              <input type="text" id="cfg-whatsapp" value="+989120000000" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid #363433; background: #141312; color: #fff; font-family: var(--font-mono); direction: ltr;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 0.85rem; margin-bottom: 0.4rem; color: #ccc;">عنوان نسخه فصلی:</label>
+              <input type="text" id="cfg-edition" value="EDITION 01 / AUTUMN-WINTER" style="width: 100%; padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid #363433; background: #141312; color: #fff; font-family: var(--font-mono);" />
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="margin-top: 1rem; padding: 0.85rem;">
+              <span>ذخیره تغییرات و اعمال در سایت</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="d8-toast"></div>
+
+  <script src="assets/main.js"></script>
+
+  <style>
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: var(--radius-pill);
+      color: #9a8f80;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+    .tab-btn.active {
+      background: rgba(233, 193, 118, 0.15);
+      color: var(--color-gold-bright);
+      border: 1px solid rgba(233, 193, 118, 0.3);
+    }
+    @media (min-width: 768px) {
+      .console-telemetry { display: flex !important; }
+    }
+  </style>
+
+  <script>
+    function switchConsoleTab(tabId, el) {
+      document.querySelectorAll(".console-tab-content").forEach(c => c.style.display = "none");
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      
+      const target = document.getElementById("tab-" + tabId);
+      if (target) target.style.display = "block";
+      if (el) el.classList.add("active");
+    }
+
+    function renderConsoleCatalog() {
+      const container = document.getElementById("console-catalog-list");
+      if (!container) return;
+
+      container.innerHTML = D8_PRODUCTS.map(p => `
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: #141312; border-radius: var(--radius-sm); border: 1px solid #363433; gap: 1rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <img src="${p.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;" />
+            <div>
+              <div style="font-weight: 600; color: #fff;">${p.titleFa}</div>
+              <div style="font-size: 0.75rem; color: #9a8f80; font-family: var(--font-mono);">${p.sku} · ${p.materialFa}</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <div style="text-align: left;">
+              <span style="display: block; font-size: 0.95rem; font-weight: 700; color: var(--color-gold-bright);">${p.priceFa}</span>
+              <span style="font-size: 0.7rem; color: #4ade80;">${p.stockStatusFa}</span>
+            </div>
+
+            <button onclick="orderViaTelegram('${p.id}')" class="btn btn-telegram" style="padding: 0.4rem 0.85rem; font-size: 0.75rem;">
+              <span class="material-symbols-outlined text-[14px]">send</span>
+              <span>تست سفارش</span>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function handleConfigSave(e) {
+      e.preventDefault();
+      const val = document.getElementById("cfg-telegram").value.trim().replace("@", "");
+      if (val) {
+        D8_CONFIG.telegramUsername = val;
+        showD8Toast(`تنظیمات ذخیره شد. سفارشات به @${val} ارسال می‌شوند.`, "save");
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderConsoleCatalog();
+    });
+  </script>
+
+</body>
+</html>
